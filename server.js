@@ -6,6 +6,7 @@ const knex = require('knex');
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const getUsers = require('./controllers/getUsers');
+const profile = require('./controllers/Profile');
 
 const db = knex({
     client: 'pg',
@@ -35,6 +36,9 @@ app.post('/signin', (req, res) => { signin.handleSignin(req, res, db, bcrypt) })
 
 //search user
 app.get('/findUser', (req, res) => { getUsers.handleUsers(req,res,db) })
+
+//get this user profile
+app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req,res,db) })
 
 app.listen(3000, () => {
     console.log('app is running on port 3000')
