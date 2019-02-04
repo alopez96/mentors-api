@@ -5,6 +5,7 @@ const cors = require('cors');
 const knex = require('knex');
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
+const getUsers = require('./controllers/getUsers');
 
 const db = knex({
     client: 'pg',
@@ -25,11 +26,15 @@ const db = knex({
   app.use(bodyParser.json());
   app.use(cors());
 
+
 //register user
 app.post('/register', (req,res) => { register.handleRegister(req, res, db, bcrypt) })
 
 //sign in user
 app.post('/signin', (req, res) => { signin.handleSignin(req, res, db, bcrypt) })
+
+//search user
+app.get('/findUser', (req, res) => { getUsers.handleUsers(req,res,db) })
 
 app.listen(3000, () => {
     console.log('app is running on port 3000')
