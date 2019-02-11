@@ -7,14 +7,15 @@ const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const getUsers = require('./controllers/getUsers');
 const profile = require('./controllers/Profile');
+const mysql = require('./sql');
 
 const db = knex({
-    client: 'pg',
+    client: 'mysql',
     connection: {
       host : '127.0.0.1',
-      user : '',
-      password : '',
-      database : 'mentors-db'
+      user : mysql.user,
+      password : mysql.pass,
+      database : mysql.database
     }
   });
   
