@@ -6,9 +6,8 @@ const knex = require('knex');
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const getUsers = require('./controllers/getUsers');
-const profile = require('./controllers/Profile');
-const event = require('./controllers/event');
-const getEvents = require('./controllers/getEvent');
+const profile = require('./controllers/profile');
+const posts = require('./controllers/post');
 const mysql = require('./sql');
 
 const db = knex({
@@ -44,9 +43,12 @@ app.get('/findUser', (req, res) => { getUsers.handleUsers(req,res,db) })
 app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req,res,db) })
 
 //post event
-app.post('/createEvent', (req, res) => { event.handleEvent(req,res,db) })
+app.post('/createEvent', (req, res) => { posts.createPost(req,res,db) })
 
-app.get('/getEvent', (req, res) => { getEvents.handleEvents(req,res,db) })
+//get all events events from post
+app.get('/getEvents', (req, res) => { posts.handlegetEvents(req,res,db) })
+
+app.put('/editProfile', (req, res) => { profile.editProfile(req,res,db) })
 
 app.listen(3000, () => {
     console.log('app is running on port 3000')
