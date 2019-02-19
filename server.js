@@ -48,6 +48,7 @@ app.post('/createEvent', (req, res) => { posts.createPost(req,res,db) })
 //get all events events from post
 app.get('/getEvents', (req, res) => { posts.handlegetEvents(req,res,db) })
 
+//edit profile
 app.put('/editProfile', (req, res) => { profile.editProfile(req,res,db) })
 
 app.listen(3000, () => {
