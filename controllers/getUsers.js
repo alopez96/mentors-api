@@ -8,10 +8,10 @@ const handleUsers = (req,res,db) => {
     .where('name', '=', name)
     .then(data => {
         if(data){
-        return db.select('*').from('users')
-        .where('name', 'like', name+'%')
-        .then(user => {
-            res.json(user)
+        return db.select('name', 'city', 'major').from('users')
+        .where('name', 'like', '%'+name+'%').orWhere('email', 'like', '%'+email+'%')
+        .then(users => {
+            res.json(users)
         })
         .catch(err => res.status(400).json('unable to find user'))
         }
