@@ -1,6 +1,6 @@
 
 const handleUsers = (req,res,db) => {
-    const {name, email} = req.body;
+    const {name} = req.params;
     if(!name && !email){
         return res.status(400).json('incorrect form submission');
     }
@@ -8,8 +8,9 @@ const handleUsers = (req,res,db) => {
     .where('name', '=', name)
     .then(data => {
         if(data){
-        return db.select('name', 'city', 'major').from('users')
-        .where('name', 'like', '%'+name+'%').orWhere('email', 'like', '%'+email+'%')
+        return db.select('id', 'name', 'city', 'major').from('users')
+        .where('name', 'like', '%'+name+'%')
+        .orWhere('email', 'like', '%'+name+'%')
         .then(users => {
             res.json(users)
         })

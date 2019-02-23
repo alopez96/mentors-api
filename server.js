@@ -37,7 +37,7 @@ app.post('/register', (req,res) => { register.handleRegister(req, res, db, bcryp
 app.post('/signin', (req, res) => { signin.handleSignin(req, res, db, bcrypt) })
 
 //search user
-app.get('/findUser', (req, res) => { getUsers.handleUsers(req,res,db) })
+app.get('/findUser/:name', (req, res) => { getUsers.handleUsers(req,res,db) })
 
 //get this user profile
 app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req,res,db) })
