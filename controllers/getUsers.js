@@ -8,7 +8,7 @@ const handleUsers = (req,res,db) => {
     .where('name', '=', name)
     .then(data => {
         if(data){
-        return db.select('id', 'name', 'city', 'major').from('users')
+        return db.select('id', 'name', 'city', 'major', 'imageurl').from('users')
         .where('name', 'like', '%'+name+'%')
         .orWhere('email', 'like', '%'+name+'%')
         .then(users => {
