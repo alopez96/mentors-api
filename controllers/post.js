@@ -1,11 +1,9 @@
 const handlegetEvents = (req,res,db) => {
-    const { offsetVal } = req.params;
-    var offset = parseInt(offsetVal, 10);
     db.select('title', 'description','userid','created').from('posts')
     .then(data => {
         if(data){
         return db.select('*').from('posts')
-        // .limit(3).offset(offset)
+        .orderBy('created', 'desc')
         .then(event => {
             res.json(event)
         })
