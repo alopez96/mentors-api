@@ -42,11 +42,17 @@ app.get('/findUser/:name', (req, res) => { getUsers.handleUsers(req,res,db) })
 //get this user profile
 app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req,res,db) })
 
+//get all events events from post
+app.get('/getEvents', (req, res) => { posts.handlegetEvents(req,res,db) })
+
 //post event
 app.post('/createEvent', (req, res) => { posts.createPost(req,res,db) })
 
-//get all events events from post
-app.get('/getEvents/', (req, res) => { posts.handlegetEvents(req,res,db) })
+//get all questions
+app.get('/getQuestions', (req, res) => { posts.findQuestions(req,res,db) })
+
+//post new questions
+app.post('/createQuestion', (req, res) => { posts.newQuestion(req,res,db) })
 
 //edit profile
 app.put('/editProfile', (req, res) => { profile.editProfile(req,res,db) })
