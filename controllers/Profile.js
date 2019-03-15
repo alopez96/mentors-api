@@ -17,7 +17,7 @@ const handleProfileGet = (req, res, db) => {
 
 
 const editProfile = (req, res, db) => {
-    const { userid, email, name, imageurl, city, major, bio } = req.body
+    const { userid, email, name, role, school, imageurl, city, major, bio } = req.body
     if(!userid){
         return res.status(400).json('incorrect form submission');
     }
@@ -29,7 +29,9 @@ const editProfile = (req, res, db) => {
         imageurl: imageurl,
         city: city,
         major: major,
-        bio: bio
+        bio: bio,
+        role,
+        school
     })
     .then(updatedUser => {
         res.json(updatedUser[0])

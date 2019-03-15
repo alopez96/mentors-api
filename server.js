@@ -20,8 +20,8 @@ const db = knex({
     }
   });
   
-  db.select('*').from('users').then(data => {
-    console.log(data)
+  db.select('name').from('users').then(data => {
+    console.log('users', data)
   })
   
   const app = express();
