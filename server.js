@@ -8,6 +8,7 @@ const signin = require('./controllers/signin');
 const getUsers = require('./controllers/getUsers');
 const profile = require('./controllers/profile');
 const posts = require('./controllers/post');
+const question = require('./controllers/question');
 const mysql = require('./sql');
 
 const db = knex({
@@ -48,11 +49,14 @@ app.get('/getEvents', (req, res) => { posts.handlegetEvents(req,res,db) })
 //post event
 app.post('/createEvent', (req, res) => { posts.createPost(req,res,db) })
 
+//post event
+app.put('/editPost', (req, res) => { posts.editPost(req,res,db) })
+
 //get all questions
-app.get('/getQuestions', (req, res) => { posts.findQuestions(req,res,db) })
+app.get('/getQuestions', (req, res) => { question.findQuestions(req,res,db) })
 
 //post new questions
-app.post('/createQuestion', (req, res) => { posts.newQuestion(req,res,db) })
+app.post('/createQuestion', (req, res) => { question.newQuestion(req,res,db) })
 
 //edit profile
 app.put('/editProfile', (req, res) => { profile.editProfile(req,res,db) })
