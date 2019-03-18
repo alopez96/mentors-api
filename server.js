@@ -30,34 +30,31 @@ const db = knex({
   app.use(bodyParser.json());
   app.use(cors());
 
-
+//users
 //register user
 app.post('/register', (req,res) => { register.handleRegister(req, res, db, bcrypt) })
-
 //sign in user
 app.post('/signin', (req, res) => { signin.handleSignin(req, res, db, bcrypt) })
-
 //search user
 app.get('/findUser/:name', (req, res) => { getUsers.handleUsers(req,res,db) })
-
 //get this user profile
 app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req,res,db) })
 
-//get all events events from post
+//posts
+//get all posts
 app.get('/getEvents', (req, res) => { posts.handlegetEvents(req,res,db) })
-
-//post event
+//new post
 app.post('/createEvent', (req, res) => { posts.createPost(req,res,db) })
-
-//post event
+//edit post
 app.put('/editPost', (req, res) => { posts.editPost(req,res,db) })
+//delete post
+app.put('/deletePost', (req, res) => { posts.removePost(req,res,db) })
 
+//questions
 //get all questions
 app.get('/getQuestions', (req, res) => { question.findQuestions(req,res,db) })
-
 //post new questions
 app.post('/createQuestion', (req, res) => { question.newQuestion(req,res,db) })
-
 //edit profile
 app.put('/editProfile', (req, res) => { profile.editProfile(req,res,db) })
 

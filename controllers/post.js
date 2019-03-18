@@ -52,7 +52,7 @@ const editPost = (req, res, db) => {
     }
     db('posts')
     .where({ postid: postid })
-    .andWhere( {userid: userid})
+    .andWhere({ userid: userid })
     .update({
         title,
         imageurl,
@@ -64,9 +64,31 @@ const editPost = (req, res, db) => {
     .catch(err => { res.status(400).json('unable to update post')})
 }
 
+//edit post
+const removePost = (req, res, db) => {
+    const { userid, postid } = req.body
+    if(!userid){
+        return res.status(400).json('user must be signed in');
+    }
+    db('posts')
+    .where({ postid: postid })
+    .andWhere({ userid: userid })
+    .del()
+    .then((post) => {
+        if(post){
+            return res.json('deleted')
+        }
+        else{
+            return res.json('user is not able to delete')
+        }
+    })
+    .catch(err => { return res.status(400).json('unable to remove post')})
+}
+
 
 module.exports = {
     handlegetEvents,
     createPost,
-    editPost
+    editPost,
+    removePost
 }
